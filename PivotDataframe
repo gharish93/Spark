@@ -1,0 +1,4 @@
+val hivecontext=new org.apache.spark.sql.hive.HiveContext(sc);
+val input=hivecontext.sql("select * from satishdb.input");
+val output=input.groupBy("location").pivot("metrix").sum("value");
+output.write.mode("overwrite").saveAsTable("satish.output");
